@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipo Pedido - Darri</title>
+    <style>
+        /* Estilos Base - Wireframe */
+        body { font-family: sans-serif; margin: 0; display: flex; flex-direction: column; min-height: 100vh; background: #f9f9f9; }
+        header { background: #333; color: white; padding: 1rem; text-align: center; }
+        
+        /* Layout Principal */
+        .main-layout { display: flex; flex: 1; }
+        
+        /* Sección de Menú */
+        .menu-section { flex: 3; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        
+        /* Tarjetas de Producto */
+        .card { background: white; border: 2px solid #ddd; padding: 15px; border-radius: 8px; text-align: center; }
+        .img-placeholder { width: 100%; height: 120px; background: #eee; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 1px dashed #ccc; }
+        
+        /* Carrito Lateral */
+        .cart-sidebar { flex: 1; background: #fff; border-left: 2px solid #ddd; padding: 20px; min-width: 250px; }
+        .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 0.9em; }
+        
+        /* Botones */
+        .btn-add { background: #eee; border: 1px solid #999; padding: 8px 15px; cursor: pointer; width: 100%; font-weight: bold; }
+        .btn-add:hover { background: #ddd; }
+        .btn-order { background: #222; color: white; width: 100%; padding: 15px; border: none; margin-top: 20px; cursor: pointer; font-size: 1em; }
+        
+        /* Badge de cantidad */
+        .badge { background: #ff4444; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.8em; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>DARRI - Pedidos Online</h1>
+        <p>Selecciona tus platos vegetarianos favoritos</p>
+    </header>
+
+    <div class="main-layout">
+        <section class="menu-section">
+            <h3>Nuestro Menú</h3>
+            <div class="grid">
+                <div class="card">
+                    <div class="img-placeholder">PLATO A</div>
+                    <h4>Bowl de Quinoa</h4>
+                    <p>$12.00</p>
+                    <button class="btn-add">Añadir al Pedido +</button>
+                </div>
+                <div class="card">
+                    <div class="img-placeholder">PLATO B</div>
+                    <h4>Wrap de Falafel</h4>
+                    <p>$10.00</p>
+                    <button class="btn-add">Añadir al Pedido +</button>
+                </div>
+                <div class="card">
+                    <div class="img-placeholder">PLATO C</div>
+                    <h4>Tacos Veggies</h4>
+                    <p>$9.50</p>
+                    <button class="btn-add">Añadir al Pedido +</button>
+                </div>
+            </div>
+        </section>
+
+        <aside class="cart-sidebar">
+            <h3>Tu Pedido <span class="badge">2</span></h3>
+            <div class="cart-items">
+                <div class="cart-item">
+                    <span>1x Bowl de Quinoa</span>
+                    <span>$12.00</span>
+                </div>
+                <div class="cart-item">
+                    <span>1x Wrap de Falafel</span>
+                    <span>$10.00</span>
+                </div>
+            </div>
+            
+            <hr>
+            
+            <div style="display: flex; justify-content: space-between; font-weight: bold; margin-top: 20px;">
+                <span>Total:</span>
+                <span>$22.00</span>
+            </div>
+
+            <button class="btn-order">FINALIZAR COMPRA</button>
+            <p style="font-size: 0.7em; color: #777; margin-top: 10px; text-align: center;">
+                * Tiempo estimado de entrega: 25-35 min
+            </p>
+        </aside>
+    </div>
+
+</body>
+</html>

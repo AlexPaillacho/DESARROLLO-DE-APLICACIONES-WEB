@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe - Darri Comida Vegetariana</title>
+    <style>
+        /* Estilos de Baja Fidelidad (Gris, Blanco y Negro) */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background: #ddd;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #bbb;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px;
+            background: #eee;
+        }
+
+        .hero {
+            height: 200px;
+            background: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+            border: 2px dashed #999;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #ccc;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .placeholder-img {
+            width: 100%;
+            height: 150px;
+            background: #eee;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8em;
+            color: #777;
+        }
+
+        button {
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>DARRI</h1>
+        <p>Comida Vegetariana | Prototipo de Baja Fidelidad</p>
+    </header>
+
+    <nav>
+        <span>[Inicio]</span>
+        <span>[Menú]</span>
+        <span>[Reservas]</span>
+        <span>[Contacto]</span>
+    </nav>
+
+    <section class="hero">
+        <h2>Imagen Principal (Banner de Temporada)</h2>
+    </section>
+
+    <div class="container">
+        <div class="card">
+            <div class="placeholder-img">Foto Plato 1</div>
+            <h3>Bowl de Quinoa</h3>
+            <p>Descripción breve de los ingredientes naturales.</p>
+            <strong>$00.00</strong><br><br>
+            <button>Agregar</button>
+        </div>
+
+        <div class="card">
+            <div class="placeholder-img">Foto Plato 2</div>
+            <h3>Hamburguesa de Lentejas</h3>
+            <p>Pan artesanal y vegetales frescos.</p>
+            <strong>$00.00</strong><br><br>
+            <button>Agregar</button>
+        </div>
+
+        <div class="card">
+            <div class="placeholder-img">Foto Plato 3</div>
+            <h3>Ensalada Darri</h3>
+            <p>La especialidad de la casa con aderezo secreto.</p>
+            <strong>$00.00</strong><br><br>
+            <button>Agregar</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Darri - Calle Falsa 123, Ciudad - Redes Sociales [FB] [IG]</p>
+    </footer>
+
+</body>
+</html>
