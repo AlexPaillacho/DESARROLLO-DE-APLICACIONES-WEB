@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darri | Stone Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Paleta Gris Piedra Oscuro */
+            --stone-dark: #2A2C2E;      /* Piedra profundo */
+            --stone-medium: #3F4245;    /* Gris intermedio para tarjetas */
+            --stone-light: #A7A9AC;     /* Gris claro para textos mudos */
+            --stone-border: #4A4D50;    /* Bordes sutiles */
+            --off-white: #F4F4F4;       /* Blanco roto para contraste */
+            --accent-glow: rgba(255, 255, 255, 0.05);
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            height: 100vh; 
+            background: var(--stone-dark); 
+            color: var(--off-white);
+            overflow: hidden;
+        }
+
+        /* --- Header Minimalista --- */
+        header { 
+            background: var(--stone-dark);
+            padding: 1.5rem 5%; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--stone-border);
+        }
+
+        header h1 { 
+            font-family: 'Fraunces', serif; 
+            font-size: 1.8rem; 
+            margin: 0; 
+            color: var(--off-white);
+            letter-spacing: -0.5px;
+        }
+
+        .status-pill {
+            border: 1px solid var(--stone-border);
+            color: var(--stone-light);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- Layout --- */
+        .main-layout { display: flex; flex: 1; overflow: hidden; }
+
+        /* --- Sección Menú --- */
+        .menu-section { 
+            flex: 3; 
+            padding: 40px 5%; 
+            overflow-y: auto;
+            scrollbar-width: none; /* Firefox */
+        }
+        .menu-section::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+        .menu-section h3 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            color: var(--stone-light);
+            font-weight: 400;
+        }
+
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 30px; 
+        }
+
+        /* --- Tarjetas Estilo Piedra --- */
+        .card { 
+            background: var(--stone-medium); 
+            padding: 10px; 
+            border-radius: 16px; 
+            transition: var(--transition);
+            border: 1px solid var(--stone-border);
+        }
+
+        .card:hover { 
+            transform: translateY(-5px);
+            border-color: var(--stone-light);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .img-container { 
+            width: 100%; 
+            height: 240px; 
+            border-radius: 12px; 
+            overflow: hidden;
+            position: relative;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(0.8) contrast(1.1);
+            transition: var(--transition);
+        }
+
+        .card:hover .img-container img {
+            filter: saturate(1.1);
+            transform: scale(1.03);
+        }
+
+        .card-info { padding: 15px 5px; }
+
+        .card h4 { margin: 0 0 8px 0; font-size: 1.1rem; font-weight: 600; }
+        .card .price { color: var(--stone-light); font-size: 1rem; margin-bottom: 20px; display: block; }
+        
+        .btn-add { 
+            background: var(--off-white); 
+            border: none; 
+            padding: 14px; 
+            cursor: pointer; 
+            width: 100%; 
+            font-weight: 700; 
+            color: var(--stone-dark);
+            border-radius: 10px;
+            transition: var(--transition);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        .btn-add:hover { 
+            background: #ffffff;
+            letter-spacing: 1.5px;
+        }
+
+        /* --- Carrito Lateral --- */
+        .cart-sidebar { 
+            flex: 1; 
+            background: #242628; /* Ligeramente más oscuro que el fondo principal */
+            border-left: 1px solid var(--stone-border); 
+            padding: 40px 30px; 
+            min-width: 360px; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-header h3 { font-family: 'Fraunces', serif; font-size: 1.4rem; margin: 0; }
+
+        .cart-items { margin: 30px 0; flex: 1; }
+
+        .cart-item { 
+            display: flex; 
+            justify-content: space-between;
+            padding: 15px 0; 
+            border-bottom: 1px solid var(--stone-border); 
+            font-size: 0.9rem;
+        }
+
+        .cart-item-price { font-weight: 600; color: var(--off-white); }
+
+        /* --- Resumen Final --- */
+        .summary {
+            background: var(--stone-medium);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid var(--stone-border);
+        }
+
+        .total-row {
+            display: flex; 
+            justify-content: space-between; 
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--stone-border);
+        }
+
+        .btn-order { 
+            background: transparent; 
+            color: var(--off-white); 
+            border: 1.5px solid var(--off-white);
+            width: 100%; 
+            padding: 18px; 
+            border-radius: 12px;
+            margin-top: 20px; 
+            cursor: pointer; 
+            font-size: 0.85rem; 
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: var(--transition);
+        }
+
+        .btn-order:hover { 
+            background: var(--off-white);
+            color: var(--stone-dark);
+        }
+
+        .badge { 
+            font-size: 0.7rem;
+            color: var(--stone-light);
+            border: 1px solid var(--stone-border);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 1000px) {
+            .main-layout { flex-direction: column; overflow-y: auto; }
+            .cart-sidebar { border-left: none; min-width: auto; }
+            body { overflow-y: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>DARRI</h1>
+        <div class="status-pill">Stone Edition • 2026</div>
+    </header>
+
+    <div class="main-layout">
+        <section class="menu-section">
+            <h3>Menú de Temporada</h3>
+            <div class="grid">
+                <div class="card">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=600" alt="Bowl">
+                    </div>
+                    <div class="card-info">
+                        <h4>Bowl de Quinoa Real</h4>
+                        <span class="price">$12.00</span>
+                        <button class="btn-add">Añadir Selección</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&q=80&w=600" alt="Wrap">
+                    </div>
+                    <div class="card-info">
+                        <h4>Wrap Falafel Crunch</h4>
+                        <span class="price">$10.00</span>
+                        <button class="btn-add">Añadir Selección</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=600" alt="Tacos">
+                    </div>
+                    <div class="card-info">
+                        <h4>Tacos de Heura</h4>
+                        <span class="price">$9.50</span>
+                        <button class="btn-add">Añadir Selección</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <aside class="cart-sidebar">
+            <div class="cart-header" style="display: flex; justify-content: space-between; align-items: baseline;">
+                <h3>Tu Selección</h3>
+                <span class="badge">02 items</span>
+            </div>
+
+            <div class="cart-items">
+                <div class="cart-item">
+                    <span>1x Bowl de Quinoa</span>
+                    <span class="cart-item-price">$12.00</span>
+                </div>
+                <div class="cart-item">
+                    <span>1x Wrap Falafel</span>
+                    <span class="cart-item-price">$10.00</span>
+                </div>
+            </div>
+            
+            <div class="summary">
+                <div style="display: flex; justify-content: space-between; color: var(--stone-light); font-size: 0.8rem; margin-bottom: 10px;">
+                    <span>Subtotal</span>
+                    <span>$22.00</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; color: var(--stone-light); font-size: 0.8rem;">
+                    <span>Cargos de Servicio</span>
+                    <span>$0.00</span>
+                </div>
+                <div class="total-row">
+                    <span>Total</span>
+                    <span>$22.00</span>
+                </div>
+                <button class="btn-order">Confirmar Pedido</button>
+            </div>
+        </aside>
+    </div>
+
+</body>
+</html>
