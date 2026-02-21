@@ -3,79 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wireframe - Darri Comida Vegetariana</title>
+    <title>Darri - Sabores Orgánicos | Alta Fidelidad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <style>
-        /* Estilos de Baja Fidelidad (Gris, Blanco y Negro) */
+        :root {
+            /* Nueva Paleta de Colores más rica */
+            --primary-green: #2D5A27; 
+            --accent-orange: #E67E22; /* Toque de zanahoria/terracota */
+            --soft-yellow: #F4D03F;   /* Brillo de sol/maíz */
+            --warm-white: #FDFBF7;
+            --deep-black: #121212;
+            --leaf-green: #4CAF50;
+            --gradient-forest: linear-gradient(135deg, #2D5A27 0%, #1E3D1A 100%);
+            --shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: var(--warm-white);
+            color: var(--deep-black);
+            overflow-x: hidden;
         }
 
+        /* Navegación mejorada */
         header {
-            background: #ddd;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 2px solid #bbb;
-        }
-
-        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 50px;
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 10px;
-            background: #eee;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            color: var(--primary-green);
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--deep-black);
+            margin-left: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        /* Línea decorativa en hover */
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-orange);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after { width: 100%; }
+        nav a:hover { color: var(--accent-orange); }
+
+        /* Hero dinámico con colores */
         .hero {
-            height: 200px;
-            background: #ccc;
+            height: 550px;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=2070');
+            background-size: cover;
+            background-position: center;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin: 20px;
-            border: 2px dashed #999;
+            color: white;
+            text-align: center;
+            clip-path: ellipse(150% 100% at 50% 0%); /* Curva moderna en la base */
         }
 
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            background: var(--soft-yellow);
+            color: var(--primary-green);
+            padding: 5px 20px;
+            font-weight: 600;
+            transform: rotate(-2deg); /* Estilo artesanal */
+            margin-top: 20px;
+        }
+
+        /* Grid de Menú con más color */
         .container {
+            max-width: 1200px;
+            margin: 60px auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            padding: 0 20px;
         }
 
         .card {
             background: white;
-            border: 1px solid #ccc;
-            padding: 15px;
-            text-align: center;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0,0,0,0.03);
+            position: relative;
         }
 
-        .placeholder-img {
+        /* Badge de "Fresco" */
+        .card::before {
+            content: 'NUEVO';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-orange);
+            color: white;
+            padding: 5px 15px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            border-radius: 20px;
+            z-index: 10;
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(45, 90, 39, 0.15);
+        }
+
+        .card-img {
             width: 100%;
-            height: 150px;
-            background: #eee;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s;
         }
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.8em;
-            color: #777;
+        .card:hover .card-img { transform: scale(1.1); }
+
+        .card-content {
+            padding: 30px;
+        }
+
+        .card-content h3 {
+            margin: 0 0 10px 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-green);
+        }
+
+        .price {
+            font-weight: 800;
+            color: var(--accent-orange);
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 20px;
         }
 
         button {
-            background: #333;
+            background: var(--gradient-forest);
             color: white;
-            padding: 10px 20px;
+            width: 100%;
+            padding: 15px;
             border: none;
+            border-radius: 15px;
             cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: var(--deep-black);
+            letter-spacing: 1px;
+        }
+
+        /* Footer con Color Deep Green */
+        footer {
+            background: var(--primary-green);
+            color: #e0e0e0;
+            padding: 80px 20px;
+            text-align: center;
+            border-top: 8px solid var(--soft-yellow);
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 3rem; }
+            header { padding: 20px; }
+            nav a { margin: 0 8px; font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -83,48 +223,55 @@
 
     <header>
         <h1>DARRI</h1>
-        <p>Comida Vegetariana | Prototipo de Baja Fidelidad</p>
+        <nav>
+            <a href="#">Inicio</a>
+            <a href="#">Menú</a>
+            <a href="#">Reservas</a>
+            <a href="#">Contacto</a>
+        </nav>
     </header>
 
-    <nav>
-        <span>[Inicio]</span>
-        <span>[Menú]</span>
-        <span>[Reservas]</span>
-        <span>[Contacto]</span>
-    </nav>
-
     <section class="hero">
-        <h2>Imagen Principal (Banner de Temporada)</h2>
+        <h2>Sabores de la Tierra</h2>
+        <p>100% Orgánico • 100% Amor</p>
     </section>
 
     <div class="container">
         <div class="card">
-            <div class="placeholder-img">Foto Plato 1</div>
-            <h3>Bowl de Quinoa</h3>
-            <p>Descripción breve de los ingredientes naturales.</p>
-            <strong>$00.00</strong><br><br>
-            <button>Agregar</button>
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800');"></div>
+            <div class="card-content">
+                <h3>Bowl del Bosque</h3>
+                <p>Quinoa real, aguacate hass, rábano sandía y aderezo de tahini cítrico.</p>
+                <span class="price">$12.50</span>
+                <button>Agregar al carrito</button>
+            </div>
         </div>
 
         <div class="card">
-            <div class="placeholder-img">Foto Plato 2</div>
-            <h3>Hamburguesa de Lentejas</h3>
-            <p>Pan artesanal y vegetales frescos.</p>
-            <strong>$00.00</strong><br><br>
-            <button>Agregar</button>
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800');"></div>
+            <div class="card-content">
+                <h3>Ensalada Zen</h3>
+                <p>Hojas verdes baby, tofu marinado en jengibre y semillas de calabaza tostadas.</p>
+                <span class="price">$10.90</span>
+                <button>Agregar al carrito</button>
+            </div>
         </div>
 
         <div class="card">
-            <div class="placeholder-img">Foto Plato 3</div>
-            <h3>Ensalada Darri</h3>
-            <p>La especialidad de la casa con aderezo secreto.</p>
-            <strong>$00.00</strong><br><br>
-            <button>Agregar</button>
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800');"></div>
+            <div class="card-content">
+                <h3>Pasta de la Huarta</h3>
+                <p>Pasta artesanal con pesto de albahaca fresca y tomates cherry confitados.</p>
+                <span class="price">$14.00</span>
+                <button>Agregar al carrito</button>
+            </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 Darri - Calle Falsa 123, Ciudad - Redes Sociales [FB] [IG]</p>
+        <div class="footer-logo">DARRI</div>
+        <p>Hecho con productos locales de agricultores independientes.</p>
+        <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;">© 2024 Darri Restaurante Vegetariano.</p>
     </footer>
 
 </body>
