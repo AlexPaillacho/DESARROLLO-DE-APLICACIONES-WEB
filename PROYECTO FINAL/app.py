@@ -1,6 +1,8 @@
-from flask import Flask,render_template,url_for,request,redirect,flash
+from flask import Flask, render_template, url_for, request, redirect, flash
 
 app = Flask(__name__)
+
+app.config['SECRET_KEY'] = 'MI_CLAVE_SECRETA'
 
 @app.route('/')
 def index():
