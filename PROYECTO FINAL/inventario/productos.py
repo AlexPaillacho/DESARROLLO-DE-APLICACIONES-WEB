@@ -1,0 +1,24 @@
+# clase producto
+
+class Producto:
+    def __init__(self, id, nombre, descripcion, cantidad, precio):
+        self.descripcion = descripcion
+        self.cantidad = cantidad
+        self.precio = precio
+
+# tuple
+    def to_tuple (self):
+     return(self.id, self.nombre, self.descripcion, self.cantidad, self.precio)
+
+#dict
+    def to_dict(self):
+     return{
+         'id' : self.id,
+         'nombre' : self.nombre,
+         'descripcion' : self.descripcion,
+         'cantidad' : self.cantida,
+         'precio' : self.precio
+           }
+        
+        
+    

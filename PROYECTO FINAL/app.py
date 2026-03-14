@@ -34,8 +34,8 @@ def producto_nuevo():
         
         flash(' Producto agregado exitosamente')
 
-        return redirect(url_for("inico"))
-    return render_template("producto_form.html", form=form)
+        return redirect(url_for("index"))
+    return render_template("producto_form.html", form=form, titulo="Nuevo Producto" )
 
 
 if __name__ == "__main__":
