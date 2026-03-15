@@ -18,7 +18,7 @@ class Producto:
          'descripcion' : self.descripcion,
          'cantidad' : self.cantida,
          'precio' : self.precio
-           }
+    }
         
         
     
