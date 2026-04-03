@@ -1,7 +1,54 @@
-body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-header { background: #333; color: white; padding: 1rem; text-align: center; }
-nav ul { list-style: none; padding: 0; }
-nav ul li { display: inline; margin-right: 15px; }
-nav ul li a { color: white; text-decoration: none; }
-main { padding: 20px; min-height: 400px; }
-footer { background: #eee; text-align: center; padding: 10px; position: relative; bottom: 0; width: 100%; }
+:root {
+    --logic-blue: #0d47a1; /* Azul corporativo fuerte */
+    --logic-dark: #1a237e; /* Azul noche para contrastes */
+    --logic-gray: #f5f7fa; /* Fondo limpio */
+    --logic-accent: #00bcd4; /* Cian para detalles tecnológicos */
+}
+
+body {
+    background-color: var(--logic-gray);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Navbar con estilo IT */
+.navbar-logic {
+    background: linear-gradient(90deg, var(--logic-dark) 0%, var(--logic-blue) 100%);
+    border-bottom: 3px solid var(--logic-accent);
+}
+
+/* Tablas profesionales */
+.table-logic thead {
+    background-color: var(--logic-dark);
+    color: white;
+}
+
+.card-logic {
+    border-top: 5px solid var(--logic-blue);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+:root {
+        --logic-blue: #0d47a1; /* Azul corporativo */
+        --logic-dark: #1a237e; /* Azul noche */
+        --logic-gray: #f5f7fa; /* Fondo gris claro */
+        --logic-accent: #00bcd4; /* Cian técnico */
+    }
+
+    body {
+        background-color: var(--logic-gray) !important;
+        font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    /* Cambio del color del Navbar */
+    .navbar {
+        background: linear-gradient(90deg, var(--logic-dark) 0%, var(--logic-blue) 100%) !important;
+        border-bottom: 3px solid var(--logic-accent);
+    }
+
+    /* Estilo para los botones principales */
+    .btn-primary, .btn-danger {
+        border-radius: 4px;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+    }

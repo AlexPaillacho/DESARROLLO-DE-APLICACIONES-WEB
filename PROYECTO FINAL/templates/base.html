@@ -3,59 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} El Reventador {% endblock %}</title>
+    <title>{% block title %} LOGIC SERVIS {% endblock %}</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <style>
+        /* Agregamos el degradado directamente aquí para asegurar que se aplique */
+        .navbar-custom {
+            background: linear-gradient(90deg, #1a237e 0%, #0d47a1 100%) !important;
+            border-bottom: 3px solid #00bcd4;
+        }
+        .nav-link:hover {
+            color: #00bcd4 !important;
+        }
+    </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100 bg-light">
     
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">🍞 El Reventador</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('index') }}">Inicio</a>
+    <nav class="navbar navbar-expand-lg navbar-dark shadow" style="background: linear-gradient(90deg, #1a237e 0%, #0d47a1 100%);">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
+            <i class="bi bi-boxes me-2"></i> PRODUCTOS
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('inicio') }}">
+                        <i class="bi bi-info-circle me-1"></i> Inicio
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('producto_nuevo') }}">
+                        <i class="bi bi-plus-square me-1"></i> Nuevo Producto
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ms-auto align-items-center">
+                {% if session.get('username') %}
+                    <li class="nav-item me-3">
+                        <span class="navbar-text text-white fw-bold">
+                            <i class="bi bi-person-circle me-1"></i> {{ session['username'] }}
+                        </span>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('producto_nuevo') }}">Nuevo Producto</a>
+                        <a class="btn btn-outline-light btn-sm px-3" href="{{ url_for('logout') }}">
+                            <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                        </a>
                     </li>
-                </ul>
-                
-                <ul class="navbar-nav">
-                    {% if session.get('username') %}
-                        <li class="nav-item">
-                            <span class="nav-link text-info"><i class="bi bi-person-circle"></i> {{ session['username'] }}</span>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn btn-outline-danger btn-sm ms-lg-3 px-3" href="{{ url_for('logout') }}">Cerrar Sesión</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('login') }}">Iniciar Sesión</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login') }}">Iniciar Sesión</a>
+                    </li>
+                {% endif %}
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 </header>
    
 <main class="py-4">
     <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category if category != 'message' else 'info' }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
         {% block content %}{% endblock %}
     </div>
 </main>
 
-<footer class="text-center py-4 bg-light mt-auto border-top">
-    <p class="text-muted mb-0 small">&copy; 2026 Inventario Panadería El Reventador - Alex Dario</p>
+<footer class="text-center py-4 bg-white mt-auto border-top">
+    <div class="container">
+        <p class="text-muted mb-0 small">
+            <i class="bi bi-code-slash"></i> 2026 <strong>Logic Servis</strong> - Panel de Gestión de Inventario
+        </p>
+    </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

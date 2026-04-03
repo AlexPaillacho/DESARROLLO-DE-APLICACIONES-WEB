@@ -1,42 +1,55 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container mt-5">
-    <div class="card shadow">
-        <div class="card-header bg-primary text-white">
-            <h3>{{ titulo }}</h3>
-        </div>
-        <div class="card-body">
-            <form method="POST">
-                {{ form.hidden_tag() }}
-                <div class="mb-3">
-                    {{ form.nombre.label(class="form-label") }}
-                    {{ form.nombre(class="form-control") }}
-                </div>
-                <div class="mb-3">
-                    {{ form.categoria.label(class="form-label") }}
-                    {{ form.categoria(class="form-control") }}
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        {{ form.cantidad.label(class="form-label") }}
-                        {{ form.cantidad(class="form-control") }}
-                    </div>
-
-                <div class="mb-3">
-                    {{ form.sku.label(class="form-label") }}
-                    {{ form.sku(class="form-control", placeholder="Ej: PAN001") }}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-header text-white py-3" style="background: linear-gradient(90deg, #1a237e 0%, #0d47a1 100%);">
+                    <h4 class="mb-0 fw-bold"><i class="bi bi-plus-circle-fill me-2"></i>{{ titulo }}</h4>
                 </div>
                 
-                    <div class="col-md-6 mb-3">
-                        {{ form.tamano.label(class="form-label") }}
-                        {{ form.tamano(class="form-control") }}
-                    </div>
+                <div class="card-body p-4 bg-white">
+                    <form method="POST" action="">
+                        {{ form.hidden_tag() }}
+                        
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label fw-bold text-dark"><i class="bi bi-tag me-1"></i> Nombre del Producto</label>
+                                {{ form.nombre(class="form-control form-control-lg", placeholder="Ej: Servidor Dell PowerEdge") }}
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold text-dark"><i class="bi bi-qr-code me-1"></i> SKU / Código</label>
+                                {{ form.sku(class="form-control", placeholder="Ej: LS-101") }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold text-dark"><i class="bi bi-folder2 me-1"></i> Categoría</label>
+                                {{ form.categoria(class="form-control", placeholder="Hardware, Software, etc.") }}
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold text-dark"><i class="bi bi-box-seam me-1"></i> Stock inicial</label>
+                                {{ form.cantidad(class="form-control", type="number") }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold text-dark"><i class="bi bi-balanced-scale me-1"></i> Peso / Medida</label>
+                                {{ form.peso(class="form-control", placeholder="Ej: 2.5 kg") }}
+                            </div>
+                        </div>
+
+                        <hr class="my-4 text-muted">
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary px-4">
+                                <i class="bi bi-arrow-left"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary px-5 shadow-sm" style="background-color: #0d47a1;">
+                                <i class="bi bi-save me-1"></i> Guardar Activo
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <div class="mt-3">
-                    <button type="submit" class="btn btn-success">Guardar Producto</button>
-                    <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancelar</a>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
