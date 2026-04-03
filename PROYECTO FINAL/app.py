@@ -5,7 +5,7 @@ from forms.producto_form import productoForm
 import os
 from fpdf import FPDF
 from flask import make_response
-
+from io import BytesIO
 
 
 app = Flask(__name__)
@@ -123,36 +123,51 @@ def generar_reporte():
     if 'username' not in session:
         return redirect(url_for('login'))
     
-    # 1. Obtener los productos reales de la base de datos
+    
     productos = ProductoService.listar_todos()
     
-    # 2. Crear el PDF
+    from fpdf import FPDF
     pdf = FPDF()
     pdf.add_page()
+    
+    # --- Configuración del PDF ---
     pdf.set_font("Arial", "B", 16)
-    pdf.cell(190, 10, "PANADERIA EL REVENTADOR - INVENTARIO", ln=True, align="C")
+    pdf.cell(190, 10, "INVENTARIO - PANADERIA EL REVENTADOR", ln=True, align="C")
     pdf.ln(10)
     
-    # Cabeceras de la tabla
-    pdf.set_font("Arial", "B", 12)
-    pdf.set_fill_color(200, 200, 200)
-    pdf.cell(30, 10, "SKU", 1, 0, "C", True)
-    pdf.cell(80, 10, "Producto", 1, 0, "C", True)
-    pdf.cell(30, 10, "Stock", 1, 0, "C", True)
-    pdf.cell(50, 10, "Categoria", 1, 1, "C", True)
+    # Cabeceras
+    pdf.set_font("Arial", "B", 11)
+    pdf.cell(30, 10, "SKU", 1)
+    pdf.cell(80, 10, "Producto", 1)
+    pdf.cell(30, 10, "Stock", 1)
+    pdf.cell(50, 10, "Categoria", 1)
+    pdf.ln()
     
-    # Datos de los productos
-    pdf.set_font("Arial", "", 12)
+    # Datos
+    pdf.set_font("Arial", "", 10)
     for p in productos:
-        pdf.cell(30, 10, str(p['sku']), 1, 0, "C")
-        pdf.cell(80, 10, str(p['producto']), 1, 0, "L")
-        pdf.cell(30, 10, str(p['stock']), 1, 0, "C")
-        pdf.cell(50, 10, str(p['categoria']), 1, 1, "L")
+        # Reemplazamos caracteres problemáticos para latin-1
+        nombre = str(p.get('producto', 'S/N')).encode('latin-1', 'replace').decode('latin-1')
+        categoria = str(p.get('categoria', 'S/N')).encode('latin-1', 'replace').decode('latin-1')
         
-    # 3. Preparar la descarga
-    response = make_response(pdf.output())
-    response.headers.set('Content-Disposition', 'attachment', filename='inventario_reventador.pdf')
+        pdf.cell(30, 10, str(p['sku']), 1)
+        pdf.cell(80, 10, nombre, 1)
+        pdf.cell(30, 10, str(p['stock']), 1)
+        pdf.cell(50, 10, categoria, 1)
+        pdf.ln()
+    
+    # --- LA SOLUCIÓN DEFINITIVA ---
+    # 1. Generamos el output como bytes
+    pdf_output = pdf.output()
+    
+    # 2. Si fpdf2 devuelve un bytearray o bytes, lo envolvemos en BytesIO
+    buffer = BytesIO(pdf_output)
+    
+    # 3. Creamos la respuesta enviando el valor del buffer
+    response = make_response(buffer.getvalue())
+    response.headers.set('Content-Disposition', 'attachment', filename='reporte_inventario.pdf')
     response.headers.set('Content-Type', 'application/pdf')
+    
     return response
 
 if __name__ == '__main__':
