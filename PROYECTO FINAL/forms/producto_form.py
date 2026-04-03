@@ -1,12 +1,13 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DecimalField, SubmitField, IntegerField
+from wtforms import StringField, IntegerField, DecimalField, SubmitField
 from wtforms.validators import DataRequired
 
 class productoForm(FlaskForm):
-    # Usamos los nombres que pide tu base de datos
+    # Añadimos el SKU como campo obligatorio
+    sku = StringField('SKU / Código', validators=[DataRequired()])
     nombre = StringField('Nombre del Producto', validators=[DataRequired()])
     categoria = StringField('Categoría', validators=[DataRequired()])
-    cantidad = IntegerField('Stock Inicial', validators=[DataRequired()])
-    tamano = DecimalField('Tamaño (Altura)', places=2)
-    peso = DecimalField('Peso (kg)', places=2)
-    submit = SubmitField('Agregar producto')
+    cantidad = IntegerField('Stock', validators=[DataRequired()])
+    tamano = StringField('Tamaño')
+    peso = DecimalField('Peso')
+    submit = SubmitField('Guardar Producto')

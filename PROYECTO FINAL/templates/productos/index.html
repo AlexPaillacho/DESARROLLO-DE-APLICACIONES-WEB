@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Inventario de Productos - El Reventador</h2>
+        <a href="{{ url_for('producto_nuevo') }}" class="btn btn-success shadow-sm"> + Agregar Producto</a>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table table-hover table-bordered align-middle mb-0">
+            <thead class="table-dark">
+                <tr class="text-center">
+                    <th>SKU</th>
+                    <th>Producto</th>
+                    <th>Stock</th>
+                    <th>Categoría</th>
+                    <th>Responsable (Empleado)</th>
+                    <th>Cliente Destino</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in productos %}
+                <tr>
+                    <td class="text-center"><strong>{{ p.sku }}</strong></td>
+                    <td>{{ p.producto }}</td>
+                    <td class="text-center">
+                        <span class="badge {% if p.stock > 10 %}bg-success{% else %}bg-danger{% endif %}">
+                            {{ p.stock }}
+                        </span>
+                    </td>
+                    <td><span class="badge bg-secondary">{{ p.categoria }}</span></td>
+                    <td>
+                        <i class="bi bi-person-badge"></i> {{ p.responsable if p.responsable else 'Sin asignar' }}
+                    </td>
+                    <td>
+                        <i class="bi bi-person"></i> {{ p.cliente_frecuente if p.cliente_frecuente else 'Sin cliente' }}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" class="text-center text-muted py-4">
+                        No hay productos registrados en el inventario.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
