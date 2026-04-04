@@ -1,24 +1,28 @@
-
-
+/*  PALETA DE COLORES Y VARIABLES */
 :root {
-    --logic-blue: #0d47a1; 
+    --logic-blue: #606f86; 
     --logic-dark: #1a237e; 
     --logic-gray: #f5f7fa; 
     --logic-accent: #00bcd4; 
 }
 
+/*  ESTILOS GENERALES */
 body {
-    background-color: var(--logic-gray);
+    background-color: var(--logic-gray) !important;
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-
-.navbar-logic {
-    background: linear-gradient(90deg, var(--logic-dark) 0%, var(--logic-blue) 100%);
-    border-bottom: 3px solid var(--logic-accent);
+/*  NAVEGACIÓN (Navbar de Logic Servis) */
+.navbar, .navbar-custom, .navbar-logic {
+    background: linear-gradient(90deg, var(--logic-dark) 0%, var(--logic-blue) 100%) !important;
+    border-bottom: 3px solid var(--logic-accent) !important;
 }
 
+.nav-link:hover {
+    color: var(--logic-accent) !important;
+}
 
+    /*  COMPONENTES (Tablas y Tarjetas) */
 .table-logic thead {
     background-color: var(--logic-dark);
     color: white;
@@ -29,50 +33,22 @@ body {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-:root {
-        --logic-blue: #0d47a1; 
-        --logic-dark: #1a237e; 
-        --logic-gray: #f5f7fa; 
-        --logic-accent: #00bcd4; 
-    }
-
-    body {
-        background-color: var(--logic-gray) !important;
-        font-family: 'Segoe UI', Arial, sans-serif;
-    }
-
-    
-    .navbar {
-        background: linear-gradient(90deg, var(--logic-dark) 0%, var(--logic-blue) 100%) !important;
-        border-bottom: 3px solid var(--logic-accent);
-    }
-
-    /* Estilo para los botones principales */
-    .btn-primary, .btn-danger {
-        border-radius: 4px;
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size: 0.8rem;
-    }
-
-    /* Estilos para Logic Servis */
-
-.navbar-custom {
-    background: linear-gradient(90deg, #1a237e 0%, #0d47a1 100%) !important;
-    border-bottom: 3px solid #00bcd4;
+/* Estilo para los botones principales */
+.btn-primary, .btn-danger {
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
 }
 
-.nav-link:hover {
-    color: #00bcd4 !important;
-}
-
+    /* FOOTER (Pie de página) */
 
 footer i {
-    color: #0d47a1;
+    color: var(--logic-blue);
     font-size: 1.1rem;
     margin-right: 5px;
 }
 
 footer strong {
-    color: #1a237e;
+    color: var(--logic-dark);
 }

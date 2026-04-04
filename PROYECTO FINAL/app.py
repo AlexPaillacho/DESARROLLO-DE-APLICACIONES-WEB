@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for, flash, session, req
 from services.producto_service import ProductoService
 from services.auth_service import AuthService
 from forms.producto_form import productoForm
-from flask import Flask, render_template, redirect, url_for, flash, session, request, make_response
+
 from io import BytesIO 
 from fpdf import FPDF
 import os
