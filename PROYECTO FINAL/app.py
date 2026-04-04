@@ -3,7 +3,7 @@ from services.producto_service import ProductoService
 from services.auth_service import AuthService
 from forms.producto_form import productoForm
 from flask import Flask, render_template, redirect, url_for, flash, session, request, make_response
-from io import BytesIO # <--- Asegúrate de tener esta línea arriba en tus imports
+from io import BytesIO 
 from fpdf import FPDF
 import os
 
@@ -13,7 +13,7 @@ import os
 app = Flask(__name__)
 app.secret_key = 'logic_servis_2026_full_key'
 
-# --- 1. SEGURIDAD (LOGIN/LOGOUT) ---
+# 1. SEGURIDAD (LOGIN/LOGOUT) 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -40,7 +40,7 @@ def logout():
     session.clear()
     return redirect(url_for('login'))
 
-# --- 2. RUTAS PRINCIPALES ---
+# 2. RUTAS PRINCIPALES 
 
 @app.route('/')
 def index():
@@ -48,7 +48,7 @@ def index():
         return redirect(url_for('login'))
     
     productos = ProductoService.listar_todos()
-    # Apuntamos a la subcarpeta 'productos' como tienes en VS Code
+    
     return render_template('productos/index.html', productos=productos)
 
 @app.route('/inicio')
@@ -57,7 +57,7 @@ def inicio():
         return redirect(url_for('login'))
     return render_template('inicio.html')
 
-# --- 3. GESTIÓN DE PRODUCTOS (NUEVO, EDITAR, ELIMINAR) ---
+# 3. GESTIÓN DE PRODUCTOS (NUEVO, EDITAR, ELIMINAR) 
 
 @app.route('/productos/nuevo', methods=['GET', 'POST'])
 def producto_nuevo():
@@ -78,7 +78,7 @@ def producto_editar(sku):
     if 'username' not in session:
         return redirect(url_for('login'))
     
-    # Obtenemos los datos actuales del producto
+    
     producto_data = ProductoService.obtener_por_sku(sku)
     form = productoForm(data=producto_data)
     
@@ -99,9 +99,7 @@ def producto_eliminar(sku):
     flash("Producto eliminado", "warning")
     return redirect(url_for('index'))
 
-# --- 4. REPORTES ---
-
-
+# 4. REPORTE PDF
 
 @app.route('/productos/reporte')
 def generar_reporte():

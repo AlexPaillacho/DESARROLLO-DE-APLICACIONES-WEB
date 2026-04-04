@@ -7,6 +7,6 @@ class Producto:
         self.tamano = tamano
         self.peso = peso
 
-    # Esto sirve para que, si imprimes el objeto, se vea profesional en consola
+    
     def __repr__(self):
         return f"<Producto {self.nombre} (SKU: {self.sku})>"

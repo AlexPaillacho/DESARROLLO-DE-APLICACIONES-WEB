@@ -4,6 +4,6 @@ def obtener_conexion():
     return mysql.connector.connect(
         host="localhost",
         user="root",
-        password="", # Vacío como confirmamos
-        database="inventario" # Nombre que veo en tu phpMyAdmin
+        password="", # colocar la contraseña
+        database="inventario" # Nombre de mi base de datos de phpmyadmin
     )
