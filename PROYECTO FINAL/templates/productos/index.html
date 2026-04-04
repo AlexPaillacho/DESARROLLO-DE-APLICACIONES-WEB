@@ -2,63 +2,71 @@
 
 {% block content %}
 <div class="mb-4 p-3 border-bottom bg-white rounded shadow-sm">
-    <h2 class="fw-bold" style="color: #1a237e;">
-        <i class="bi bi-hdd-stack me-2"></i>Control de Activos Tecnológicos
-    </h2>
-    <p class="text-muted mb-0">Infraestructura y Soporte | <strong>Logic Servis</strong></p>
-
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h2 class="fw-bold" style="color: #1a237e;">
+                <i class="bi bi-hdd-stack me-2"></i>Control de Activos Tecnológicos
+            </h2>
+            <p class="text-muted mb-0">Infraestructura y Soporte | <strong>Logic Servis</strong></p>
+        </div>
         <a href="{{ url_for('generar_reporte') }}" class="btn btn-outline-danger fw-bold shadow-sm">
-           Descargar PDF
+            <i class="bi bi-file-earmark-pdf me-1"></i> Descargar PDF
         </a>
     </div>
+</div>
 
-    <div class="table-responsive shadow-sm rounded border bg-white">
-        <table class="table table-striped table-hover shadow-sm">
-            
-            
-            <thead class="table-dark">
-                <tr>
-                    <th class="text-center">SKU</th>
-                    <th>Producto</th>
-                    <th class="text-center">Stock</th>
-                    <th>Categoría</th>
-                    <th class="text-center">Acciones</th>
-                </tr>
-            </thead>
+<div class="table-responsive shadow-sm rounded border bg-white">
+    <table class="table table-striped table-hover mb-0">
+        <thead class="table-dark">
+            <tr>
+                <th class="text-center">SKU</th>
+                <th>Producto</th>
+                <th class="text-center">Stock</th>
+                <th>Categoría</th>
+                <th>Cliente</th>
+                <th>Gestionado por</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in productos %}
+            <tr class="align-middle">
+                <td class="text-center"><strong>{{ p.sku }}</strong></td>
+                <td>{{ p.producto }}</td>
+                <td class="text-center">
+                    <span class="badge {% if p.stock > 10 %}bg-success{% else %}bg-danger{% endif %} rounded-pill">
+                        {{ p.stock }}
+                    </span>
+                </td>
+                <td>{{ p.categoria }}</td>
+                
+                <td>
+                    <span class="badge bg-info text-dark shadow-sm">{{ p.cliente_nombre }}</span>
+                </td>
+                <td>
+                    <small class="text-muted">
+                        <i class="bi bi-person me-1"></i>{{ p.empleado_nombre }}
+                    </small>
+                </td>
+                
+                <td class="text-center">
+                    <div class="d-flex justify-content-center gap-2">
+                        <a href="{{ url_for('producto_editar', sku=p.sku) }}" 
+                           class="btn btn-warning btn-sm shadow-sm" title="Editar">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
 
-
-            <tbody>
-                {% for p in productos %}
-                <tr>
-                    <td class="text-center"><strong>{{ p.sku }}</strong></td>
-                    <td>{{ p.producto }}</td>
-                    <td class="text-center">
-                        <span class="badge {% if p.stock > 10 %}bg-success{% else %}bg-danger{% endif %} rounded-pill">
-                            {{ p.stock }}
-                        </span>
-                    </td>
-                    <td>{{ p.categoria }}</td>
-                    <td class="text-center">
-                        <div class="d-flex justify-content-center gap-2">
-                            <a href="{{ url_for('producto_editar', sku=p.sku) }}" 
-                               class="btn btn-warning btn-sm shadow-sm" title="Editar">
-                                ✏️
-                            </a>
-
-                            <a href="{{ url_for('producto_eliminar', sku=p.sku) }}" 
-                               class="btn btn-danger btn-sm shadow-sm" 
-                               onclick="return confirm('¿Eliminar {{ p.producto }}?')" title="Eliminar">
-                                🗑️
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-
-
-            
-        </table>
-    </div>
+                        <a href="{{ url_for('producto_eliminar', sku=p.sku) }}" 
+                           class="btn btn-danger btn-sm shadow-sm" 
+                           onclick="return confirm('¿Está seguro de eliminar el producto: {{ p.producto }}?')" 
+                           title="Eliminar">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

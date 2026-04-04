@@ -4,33 +4,26 @@ class ProductoService:
     
     @staticmethod
     def listar_todos():
-        conn = obtener_conexion()
-        productos = []
-        if conn:
-            try:
-                cursor = conn.cursor(dictionary=True)
-                # El JOIN triple que garantiza la relación de las 3 tablas
-                sql = """
-                    SELECT 
-                        p.sku, 
-                        p.nombre as producto, 
-                        p.stock, 
-                        p.categoria,
-                        p.tamaño,
-                        p.peso,
-                        e.nombre as responsable, 
-                        c.nombre as cliente_frecuente
-                    FROM inv_prd p
-                    LEFT JOIN inv_empl e ON p.id_prd = e.usuario
-                    LEFT JOIN inv_cliente c ON p.prod_empl = c.ruc
-                """
-                cursor.execute(sql)
-                productos = cursor.fetchall()
-                cursor.close()
-            except Exception as e:
-                print(f"Error al listar productos: {e}")
-            finally:
-                conn.close()
+        conexion = obtener_conexion()
+        cursor = conexion.cursor(dictionary=True)
+        
+        sql = """
+            SELECT 
+                p.sku, 
+                p.nombre AS producto, 
+                p.stock, 
+                p.categoria,
+                IFNULL(c.nombre, 'Sin Cliente') AS cliente_nombre, 
+                IFNULL(e.nombre, 'No asignado') AS empleado_nombre
+            FROM inv_prd p
+            LEFT JOIN inv_cliente c ON p.id_prd = c.ruc
+            LEFT JOIN inv_empl e ON p.prod_empl = e.usuario
+        """
+        
+        cursor.execute(sql)
+        productos = cursor.fetchall()
+        cursor.close()
+        conexion.close()
         return productos
 
     @staticmethod
