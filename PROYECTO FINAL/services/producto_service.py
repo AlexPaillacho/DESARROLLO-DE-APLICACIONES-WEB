@@ -7,6 +7,7 @@ class ProductoService:
         conexion = obtener_conexion()
         cursor = conexion.cursor(dictionary=True)
         
+        # SQL Limpio: id_prd con ruc y prod_empl con usuario
         sql = """
             SELECT 
                 p.sku, 
